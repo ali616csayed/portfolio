@@ -41,6 +41,7 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
+//RETRIEVE PHYSICIANS
 app.get('/physicians', async function (req, res) {
     let query1 = `
     SELECT 
@@ -91,7 +92,7 @@ app.get('/physicians', async function (req, res) {
     }
 });
 
-
+// RETRIEVE HOSPITAL
 app.get('/hospitals', function (req, res) {
     let query1 = "SELECT * FROM Hospitals;";
     db.pool.query(query1, function (error, rows, fields) {
@@ -99,6 +100,7 @@ app.get('/hospitals', function (req, res) {
     })
 });
 
+//RETRIEVE SPECIALTY
 app.get('/specialties', function (req, res) {
     let query1 = "SELECT * FROM Specialties;";
     db.pool.query(query1, function (error, rows, fields) {
@@ -106,6 +108,7 @@ app.get('/specialties', function (req, res) {
     })
 });
 
+//RETRIEVE PROCEDURE
 app.get('/procedures', function (req, res) {
     let query1 = "SELECT * FROM Procedures;";
     db.pool.query(query1, function (error, rows, fields) {
@@ -113,6 +116,7 @@ app.get('/procedures', function (req, res) {
     })
 });
 
+//RETIREVE PATIENT
 app.get('/patients', function (req, res) {
     let query1 = "SELECT * FROM Patients;";
     db.pool.query(query1, function (error, rows, fields) {
@@ -120,6 +124,7 @@ app.get('/patients', function (req, res) {
     })
 });
 
+//RETRIEVE VISIT
 app.get('/visits', async function (req, res) {
     let query1 = `
     SELECT
@@ -182,6 +187,8 @@ app.get('/visits', async function (req, res) {
 
 
 //POST ROUTES
+
+//CREATE SPECIALTY
 app.post('/add-specialty-ajax', function (req, res) {
     let data = req.body;
     query1 = `INSERT INTO Specialties (specialtyName)
