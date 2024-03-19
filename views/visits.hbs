@@ -1,0 +1,107 @@
+<h1>Visit Records Management</h1>
+<h2>Add a Visit Record</h2>
+    <form id="add-visit-form-ajax">
+        <label for="input-hospital">Hospital: </label>
+        <select name="input-hospital" id="input-hospital">
+            <option value="test">Select a Hospital</option>
+            {{#each hospitals}}
+            <option value={{this.hospitalID}}>{{this.hospitalName}}</option>
+            {{/each}}
+        </select>
+        <label for="input-patient">Patient: </label>
+        <select name="input-patient" id="input-patient" required>
+            <option value="test">Select a Patient</option>
+            {{#each patients}}
+            <option value={{this.patientID}}>{{this.firstName}} {{this.lastName}}</option>
+            {{/each}}
+        </select>
+        <label for="input-physician">Physician: </label>
+        <select name="input-physician" id="input-physician">
+            <option value="test">Select a Physician</option>
+            {{#each physicians}}
+            <option value={{this.physicianID}}>{{this.firstName}} {{this.lastName}}</option>
+            {{/each}}
+        </select>
+        <label for="input-date">Visit Date:</label>
+        <input type="date" id="input-date" name="input-date"
+            required><br>
+        <button type="submit">Add Visit</button>
+    </form>
+    <script src="./js/add/add_visit.js"></script>
+    <br>
+
+<h2>Updating a Procedure on Visit Record</h2>
+<p>To add a new procedure to a visit</p>
+<form id="update-visit-procedure-form-ajax">
+    <label for="input-visit">Visit ID: </label>
+    <select name="input-visit" id="input-visit-proc">
+        <option value="test">Select a Visit</option>
+        {{#each visits}}
+        <option value={{this.visitID}}>{{this.visitID}}</option>
+        {{/each}}
+    </select>
+    <label for="input-procedures">Procedure: </label>
+        <select name="input-procedures" id="input-procedures-update">
+            <option value="test">Select Procedures</option>
+            {{#each procedures}}
+            <option value={{this.procedureID}}>{{this.procedureDescription}}</option>
+            {{/each}}
+        </select>
+    <button type="submit">Update Visit</button>
+</form>
+<script src="./js/add/add_visitprocedure.js"></script>
+
+<h2>Updating a Date on Visit Record</h2>
+<p>To add a new procedure to a visit</p>
+<form id="update-visit-date-form-ajax">
+    <label for="input-visit">Visit ID: </label>
+    <select name="input-visit" id="input-visit-date">
+        <option value="test">Select a Visit</option>
+        {{#each visits}}
+        <option value={{this.visitID}}>{{this.visitID}}</option>
+        {{/each}}
+    </select>
+    <label for="input-date">Visit Date:</label>
+        <input type="date" id="input-date-update" name="input-date"><br>
+    <button type="submit">Update Visit</button>
+</form>
+<script src="./js/update/update_visit.js"></script>
+<br>
+
+{{!-- Create a table --}}
+<table id="visits-table">
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+        {{#each visits.[0]}}
+            {{#unless (eq @key "patientID")}}
+            <th>
+                {{@key}}
+            </th>
+            {{/unless}}
+        {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id and name in order--}}
+        {{#each visits}}
+        <tr data-value={{this.visitID}}>
+            <td>{{this.visitID}}</td>
+            <td>{{this.visitDate}}</td>
+            <td>{{this.hospitalName}}</td>
+            <td>{{this.patientName}}</td>
+            <td>{{this.physicianName}}</td>
+            <td>{{this.proceduresList}}</td>
+            <td>{{this.totalProceduresCost}}</td>
+            <td><button onclick="deleteVisit({{this.visitID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete/delete_visit.js"></script>

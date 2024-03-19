@@ -1,0 +1,115 @@
+/* Color Palette */
+:root {
+    /* HEX Values */
+    --carolina-blue: #74b3ceff;
+    --blue-munsell: #508991ff;
+    --prussian-blue: #172a3aff;
+    --midnight-green: #004346ff;
+    --mint: #09bc8aff;
+}
+
+/* Global Styles */
+body {
+    background-color: var(--midnight-green);
+    color: var(--mint);
+    font-family: Arial, sans-serif;
+}
+
+h1,
+h2 {
+    color: var(--carolina-blue);
+}
+
+p {
+    color: var(--blue-munsell);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--prussian-blue);
+    color: var(--mint);
+}
+
+tr:hover {
+    background-color: var(--prussian-blue);
+}
+
+.btn {
+    padding: 6px 12px;
+    text-decoration: none;
+    background-color: var(--blue-munsell);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn.edit {
+    background-color: var(--carolina-blue);
+}
+
+.btn.delete {
+    background-color: var(--prussian-blue);
+}
+
+/* Global Navigation */
+nav {
+    background-color: var(--prussian-blue);
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+a {
+    color: white;
+    text-decoration: underline;
+    margin: 0 10px;
+
+}
+
+/* Dropdown Filter */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}

@@ -1,0 +1,65 @@
+<h1>Procedure Records Management</h1>
+<h2>Add a Procedure Record</h2>
+    <form id="add-procedure-form-ajax">
+        <label for="input-description">Procedure Description:</label>
+        <input type="text" id="input-description" name="input-description"
+            required><br>
+
+        <label for="input-cost">Procedure Cost:</label>
+        <input type="number" id="input-cost" name="input-cost"
+            required><br>
+        <button type="submit">Add Procedure</button>
+    </form>
+
+    <script src="./js/add/add_procedure.js"></script>
+    <br>
+
+<h2>Updating a Procedure Record</h2>
+<p>To update a procedure cost that has been input incorrectly</p>
+<form id="update-procedure-form-ajax">
+    <label for="input-procedure">Procedure: </label>
+    <select name="input-procedure" id="input-procedure-update">
+        <option value="test">Select a Procedure</option>
+        {{#each data}}
+        <option value={{this.procedureID}}>{{this.procedureDescription}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-price">Correct Cost: </label>
+    <input type="number" id="input-price-update" name="input-price" required><br>
+    <button type="submit">Update Procedure</button>
+</form>
+<script src="./js/update/update_procedure.js"></script>
+<br>
+
+{{!-- Create a table --}}
+<table id="procedures-table">
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id and name in order--}}
+        {{#each data}}
+        <tr data-value={{this.procedureID}}>
+            <td>{{this.procedureID}}</td>
+            <td>{{this.procedureDescription}}</td>
+            <td>{{this.procedureCost}}</td>
+            <td><button onclick="deleteProcedure({{this.procedureID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete/delete_procedure.js"></script>

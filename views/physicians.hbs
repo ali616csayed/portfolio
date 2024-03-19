@@ -1,0 +1,94 @@
+<h1>Physician Records Management</h1>
+<h2>Add a Physician Record</h2>
+    <form id="add-physician-form-ajax">
+        <label for="input-fname">Physician First Name:</label>
+        <input type="text" id="input-fname" name="input-fname"
+            required><br>
+        <label for="input-lname">Physician Last Name:</label>
+        <input type="text" id="input-lname" name="input-lname"
+            required><br>
+        <label for="input-email">Physician Email:</label>
+        <input type="email" id="input-email" name="input-email"
+            required><br>
+        <label for="input-phone">Physician Phone:</label>
+        <input type="number" id="input-phone" name="input-phone"
+            required><br>
+        <label for="input-hospital">Hospital: </label>
+        <select name="input-hospital" id="input-hospital">
+            <option value="test">Select a Hospital</option>
+            {{#each hospitals}}
+            <option value={{this.hospitalID}}>{{this.hospitalName}}</option>
+            {{/each}}
+        </select>
+        <label for="input-specialty">Specialty: </label>
+        <select name="input-specialty" id="input-specialty">
+            <option value="test">Select a Specialty</option>
+            {{#each specialties}}
+            <option value={{this.specialtyID}}>{{this.specialtyName}}</option>
+            {{/each}}
+        </select>
+        <button type="submit">Add Physician</button>
+    </form>
+
+    <script src="./js/add/add_physician.js"></script>
+    <br>
+
+<h2>Updating a Physician Record</h2>
+<p>To update a physician's hospital</p>
+<form id="update-physician-form-ajax">
+    <label for="input-physician">Physician: </label>
+    <select name="input-physician" id="input-physician-update">
+        <option value="test">Select a Physician</option>
+        {{#each physicians}}
+        <option value={{this.physicianID}}>{{this.firstName}} {{this.lastName}}</option>
+        {{/each}}
+    </select>
+    <label for="input-hospital">Hospital: </label>
+    <select name="input-hospital" id="input-hospital-update">
+        <option value="test">Select a Hospital</option>
+        {{#each hospitals}}
+        <option value={{this.hospitalID}}>{{this.hospitalName}}</option>
+        {{/each}}
+    </select>
+    <button type="submit">Update Physician</button>
+</form>
+<script src="./js/update/update_physician.js"></script>
+<br>
+
+{{!-- Create a table --}}
+<table id="physicians-table">
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+        {{#each physicians.[0]}}
+            {{#unless (or (eq @key "hospitalID") (eq @key "specialtyID"))}}
+            <th>
+                {{@key}}
+            </th>
+            {{/unless}}
+        {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id and name in order--}}
+        {{#each physicians}}
+        <tr data-value={{this.physicianID}}>
+            <td>{{this.physicianID}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>{{this.hospitalName}}</td>
+            <td>{{this.specialtyName}}</td>
+            <td><button onclick="deletePhysician({{this.physicianID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete/delete_physician.js"></script>

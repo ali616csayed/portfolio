@@ -1,0 +1,60 @@
+<h1>Specialties Records Management</h1>
+<h2>Add a Specialty Record</h2>
+    <form id="add-specialty-form-ajax">
+        <label for="input-name">Specialty Name:</label>
+        <input type="text" id="input-name" name="input-name"
+            required><br>
+        <button type="submit">Add Specialty</button>
+    </form>
+
+    <script src="./js/add/add_specialty.js"></script>
+    <br>
+
+<h2>Updating a Specialty Record</h2>
+<p>To update a specialty that is misspelled but has the correct id</p>
+<form id="update-specialty-form-ajax">
+    <label for="input-specialty">Specialty: </label>
+    <select name="input-specialty" id="input-specialty-update">
+        <option value="test">Select a Specialty</option>
+        {{#each data}}
+        <option value={{this.specialtyID}}>{{this.specialtyName}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-spelling">Correct Spelling: </label>
+    <input type="text" id="input-spelling-update" name="input-spelling" required><br>
+    <button type="submit">Update Specialty</button>
+</form>
+<script src="./js/update/update_specialty.js"></script>
+<br>
+
+{{!-- Create a table --}}
+<table id="specialties-table">
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id and name in order--}}
+        {{#each data}}
+        <tr data-value={{this.specialtyID}}>
+            <td>{{this.specialtyID}}</td>
+            <td>{{this.specialtyName}}</td>
+            <td><button onclick="deleteSpecialty({{this.specialtyID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete/delete_specialty.js"></script>

@@ -1,0 +1,77 @@
+<h1>Patient Records Management</h1>
+<h2>Add a Patient Record</h2>
+    <form id="add-patient-form-ajax">
+        <label for="input-fname">Patient First Name:</label>
+        <input type="text" id="input-fname" name="input-fname"
+            required><br>
+        <label for="input-lname">Patient Last Name:</label>
+        <input type="text" id="input-lname" name="input-lname"
+            required><br>
+        <label for="input-email">Patient Email:</label>
+        <input type="email" id="input-email" name="input-email"
+            required><br>
+        <label for="input-phone">Patient Phone:</label>
+        <input type="number" id="input-phone" name="input-phone"
+            required><br>
+        <label for="input-dob">Patient Date of Birth:</label>
+        <input type="date" id="input-dob" name="input-dob"
+            required><br>
+        <button type="submit">Add Patient</button>
+    </form>
+
+    <script src="./js/add/add_patient.js"></script>
+    <br>
+
+<h2>Updating a Patient Record</h2>
+<p>To update a patient name</p>
+<form id="update-patient-form-ajax">
+    <label for="input-patient">Patient: </label>
+    <select name="input-patient" id="input-patient-update">
+        <option value="test">Select a Patient</option>
+        {{#each data}}
+        <option value={{this.patientID}}>{{this.firstName}} {{this.lastName}}</option>
+        {{/each}}
+    </select>
+    <label for="input-fname-spelling">Correct First Name Spelling: </label>
+    <input type="text" id="input-fname-update" name="input-fname-spelling" required><br>
+    <label for="input-lname-spelling">Correct Last Name Spelling: </label>
+    <input type="text" id="input-lname-update" name="input-lname-spelling" required><br>
+    <button type="submit">Update Patient</button>
+</form>
+<script src="./js/update/update_patient.js"></script>
+<br>
+
+{{!-- Create a table --}}
+<table id="patients-table">
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id and name in order--}}
+        {{#each data}}
+        <tr data-value={{this.patientID}}>
+            <td>{{this.patientID}}</td>
+            <td>{{this.firstName}}</td>
+            <td>{{this.lastName}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>{{this.dateOfBirth}}</td>
+            <td><button onclick="deletePatient({{this.patientID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete/delete_patient.js"></script>
